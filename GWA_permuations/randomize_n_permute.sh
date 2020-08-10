@@ -1,3 +1,8 @@
+##########################################
+#run this script using parallel_permute.sh
+##########################################
+
+
 rep=$1
 
 rm -R TSR_rep_${rep}
