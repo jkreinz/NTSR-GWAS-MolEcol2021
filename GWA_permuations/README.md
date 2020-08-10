@@ -1,0 +1,1 @@
+Scripts and subscripts for [randomizing phenotypes and covariates with respect to genotypes & compute GWAs randomized iterations](https://github.com/jkreinz/NTSR_GWAS/blob/master/GWA_permuations/randomize_n_permute.sh), and [calculating haplotype based sweep statistics for significant GWA hits](https://github.com/jkreinz/NTSR_GWAS/blob/master/GWA_permuations/run_selscan.sh)
