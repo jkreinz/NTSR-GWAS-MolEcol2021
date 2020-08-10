@@ -1,0 +1,1 @@
+Scripts and subscripts for randomizing phenotypes and covariates with respect to genotypes, running 250 iterations of GWA permutations on randomized phenotypes, and calculating haplotype based sweep statistics for significant GWA hits
