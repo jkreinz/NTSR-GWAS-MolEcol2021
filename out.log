@@ -1,0 +1,10 @@
+
+VCFtools - 0.1.17
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--vcf TSR_permutedsigsites.recode.vcf
+	--weir-fst-pop ../../res_inds
+	--keep ../../res_inds
+
+Error: Can't determine file type of TSR_permutedsigsites.recode.vcf
