@@ -1,4 +1,4 @@
-seq 1 16 | parallel -j 16 "bash datamashscript.sh {}"
+seq 1 16 | parallel -j 16 "bash transpose_haps_files.sh {}"
 
 #reformat map files for selscan
 for i in {1..16}
