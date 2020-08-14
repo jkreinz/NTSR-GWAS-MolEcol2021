@@ -5,7 +5,7 @@ library(ggplot2)
 library(dplyr)
 library(qqman)
 
-
+#read in GEMMA output
 sex<-fread("~/forgwas_nodups_tryagain_updated_indsexcluded_TSR.assoc.txt",header=T)
 sex$FDR_corr<-p.adjust(sex$p_lrt,method = "fdr")
 sex$bon<-p.adjust(sex$p_lrt,method = "bonferroni")
@@ -80,6 +80,7 @@ sex %>% filter(chr==5) %>%
   geom_hline(yintercept = 8.241488,lty="dashed",lwd=.25,color="grey") 
 
 
+#to plot no covariate and TSR manhattans together
 library(lemon)
 grid_arrange_shared_legend(p1,p2, nrow=2, ncol=1, position="right")
 
