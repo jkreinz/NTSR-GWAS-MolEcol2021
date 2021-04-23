@@ -1,7 +1,7 @@
 library(ggplot2)
 library(tidyverse)
 library(PNWColors)
-library(data.table)
+library(data.table) 
 
 #read in observed, expected (permuted), and genomewide sets of selscan IHS outputs (merged across sig hits for each set)
 ihs_obs<-fread("allobserved_IHS.txt")
