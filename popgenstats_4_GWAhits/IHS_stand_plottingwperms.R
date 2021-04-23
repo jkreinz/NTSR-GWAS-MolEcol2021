@@ -141,7 +141,7 @@ three<-c(bay[1],bay[3],bay[6],bay[8])
 #long$variable <- factor(long$variable, levels=c("iHS0","iHS1","unstand"))
 long$Class <- factor(long$Class, levels=c("Genome-wide","Region Permuted","Pop Permuted","Observed"))
 
-#plot
+#plot unstandardized
 long %>% filter(variable=="unstand") %>% ggplot(aes(value)) +
   geom_density(alpha=.40, aes( y=..scaled..,color=Class,fill=Class)) +
   theme_classic() +
@@ -150,6 +150,7 @@ long %>% filter(variable=="unstand") %>% ggplot(aes(value)) +
   theme(axis.text.x = element_text(angle = 90)) +
   labs(y="Density",x="unstandardized iHS") 
 
+#plot standardized
 long %>% filter(variable=="stand") %>% ggplot(aes(value)) +
   geom_density(alpha=.40, aes( y=..scaled..,color=Class,fill=Class)) +
   theme_classic() +
