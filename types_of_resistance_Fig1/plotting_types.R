@@ -1,20 +1,11 @@
 
-regional_k4<-as.data.frame(aggregate(k4[, 1:2], by=list(k4$region), mean))
-#regional_k4_n<-as.data.frame(aggregate(k4[, 1:2], by=list(k4$region), length))
-#regional_k4$n<-regional_k4_n$V2
-  
-#popk4<-as.data.frame(aggregate(k4[, 1:2], by=list(k4$Pop), mean))
-#popk4n<-as.data.frame(aggregate(k4[, 1:2], by=list(k4$pop), length))
-#popk4$num<-popk4n$V2
-
+#initialize map
 install.packages("ggmap")
 library(ggmap)
-
 water<-get_stamenmap(bbox= c(left = -97, bottom = 35, 
-                             right = -76, top = 45), maptype='toner-lite', zoom=6)
-
+                             right = -76, top = 45), maptype='toner-lite', zoom=6) #Midwest US
 water2<-get_stamenmap(bbox= c(left = -83.5, bottom = 41.8, 
-                             right = -81, top = 43), maptype='toner-lite', zoom=9)
+                             right = -81, top = 43), maptype='toner-lite', zoom=9) #Southwestern Ontario
 
 library(scatterpie)
 library(wesanderson)
@@ -33,28 +24,17 @@ p2<- ggmap(water2) +
   #geom_path(data=ca.provinces,aes(x=long,y=lat,group=group), colour="black",alpha=.8) +
   #scale_color_manual(values = c(prop = "#FF0000", suseptible = "#F2AD00", nat="#00A08A")) 
 
-
+res_phenos<-read.table("pheno_bypop.txt",header=F)
 head(res_phenos)
-res_phenos_sumbypop<-res_phenos %>% mutate(tsr_summ=case_when(V5==1 & V4 < 2 ~ 1, #TSR SNP
-                                                                      V5==0 & V4 > 2 ~ 2, #copy num
-                                                                      V5==1 & V4 > 2 ~ 3, #both TSR
-                                                                      V5==0 & V4 < 2 & V3 > 1 ~ 4, #NTSR
+res_phenos_sumbypop<-res_phenos %>% mutate(tsr_summ=case_when(V5==1 & V4 < 2 ~ 1, #just TSR SNP (V5 = 1 status, V4 < 2 refers to copy number < 2)
+                                                                      V5==0 & V4 > 2 ~ 2, #just copy num
+                                                                      V5==1 & V4 > 2 ~ 3, #both TSR SNP and copy num
+                                                                      V5==0 & V4 < 2 & V3 > 1 ~ 4, #NTSR (neither, but resistant (i,e, V3 > 1)
                                                                       V5==0 & V4 < 2 & V3 < 2 ~ 0)) %>% #sus, no mechanism
   group_by(V2,tsr_summ) %>% summarise(n = n())
 
 names(res_phenos_sumbypop)<-c("Pop","State","Count")
-
-#library(dplyr)
-#pop_props<-k4 %>% group_by(Pop, origin) %>% 
-#  summarise(n = n())
-
-
 library(tidyr)
-#pop_props_wide <- spread(pop_props, origin, n)
-#pop_props_wide$sum_n<-rowSums(pop_props_wide[,2:11],na.rm = T)
-#pop_props_wide_coord<-inner_join(pop_props_wide,inds,by="Pop")
-#names(popk4)<-c("pop","A","B","num","lat","long")
-
 pop_props_wide <- spread(res_phenos_sumbypop, State, Count)
 pop_props_wide[is.na(pop_props_wide)]<-0
 pop_props_wide$sum_n<-rowSums(pop_props_wide[,2:6],na.rm = T)
@@ -62,8 +42,6 @@ names(pop_props_wide)<-c("Pop","Sus","SNP","Amp","BothTSR","NTSR","samplesize")
 pop_props_wide_coord<-inner_join(pop_props_wide,inds,by="Pop")
 head(pop_props_wide_coord)
 tail(pop_props_wide_coord)
-
-
 
 install.packages("scatterpie")
 library(scatterpie)
