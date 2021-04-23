@@ -1,2 +1,2 @@
 # NTSR_GWAS
-scripts for GWA analyses, permutations, and popgen
+scripts for GWA analyses, permutations, popgen, & plotting
