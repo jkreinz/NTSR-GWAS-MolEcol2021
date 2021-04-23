@@ -172,4 +172,4 @@ quantile(perm_stats$mean_EHH1,probs = c(0.05, 0.95),na.rm = T) #expected 95% CI 
 median(obs_avg$EHH1_mean) #observed median
 
 quantile(perm_stats$mean_EHH2,probs = c(0.05, 0.95)) #expected 95% CI for EHH1 (sus)
-median(obs_avg$EHH2_mean) #observed median
+median(obs_avg$EHH2_mean) #observed median 
