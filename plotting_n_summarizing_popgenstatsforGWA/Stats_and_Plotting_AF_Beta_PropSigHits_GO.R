@@ -211,11 +211,6 @@ median(abs(TSRsig$beta)) #observed
 #Number of sig hits by gene and chromosome
 #############################################
 
-
-####################
-#get number of significant hits by gene
-####################
-
 hitsbygene<-read.table("nonbinary_FDR05_observedsigsnps.gff",fill = T,na.strings = "") #GFF filtered to include genes w sig hits, two covariates
 hitsbygene<-hitsbygene[,1:12]
 hitsbygene<-hitsbygene[complete.cases(hitsbygene),]
